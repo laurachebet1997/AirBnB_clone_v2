@@ -7,8 +7,7 @@ from os import environ
 from uuid import uuid4
 
 s = "HBNB_TYPE_STORAGE"
-if s in environ.keys(
-) and environ["HBNB_TYPE_STORAGE"] == "db":
+if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
     class City(BaseModel, Base):
         '''
         This is the class for City Attributes
