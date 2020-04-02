@@ -6,8 +6,8 @@ from sqlalchemy.orm import relationship
 from os import environ
 from uuid import uuid4
 
-
-if "HBNB_TYPE_STORAGE" in environ.keys(
+s = "HBNB_TYPE_STORAGE"
+if s in environ.keys(
 ) and environ["HBNB_TYPE_STORAGE"] == "db":
     class City(BaseModel, Base):
         '''
