@@ -8,13 +8,13 @@ from uuid import uuid4
 
 s = "HBNB_TYPE_STORAGE"
 if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
-class Review(BaseModel):
-    """This is the class for Review
-    Attributes:
-        place_id: place id
-        user_id: user id
-        text: review description
-    """
-    place_id = ""
-    user_id = ""
-    text = ""
+    class Review(BaseModel):
+        """This is the class for Review
+        Attributes:
+            place_id: place id
+            user_id: user id
+            text: review description
+        """
+        place_id = ""
+        user_id = ""
+        text = ""
