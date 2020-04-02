@@ -7,7 +7,8 @@ from uuid import uuid4
 from os import environ
 
 
-if "HBNB_TYPE_STORAGE" in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
+ty = "HBNB_TYPE_STORAGE"
+if ty in environ.keys() and environ[ty] == "db":
     class User(BaseModel, Base):
         """This is the class for user
         Attributes:
