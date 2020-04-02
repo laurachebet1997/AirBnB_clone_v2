@@ -61,8 +61,8 @@ class FileStorage:
             to delete obj from __objects
         '''
         if obj:
-            keys = obj.__class__.__name__ + "." + str(obj.id)
-            del self.__objects[keys]
+            dell = obj.__class__.__name__ + "." + str(obj.id)
+            del self.__objects[dell]
             self.save
 
     def close(self):
