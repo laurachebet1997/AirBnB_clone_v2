@@ -20,21 +20,26 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """returns a dictionary
         Return:
             returns a dictionary of __object
         """
-        return self.__objects
+        obj_dict = {}
+        if cls is None:
+            return self.__objects
+        for key, val in self.__objects.items():
+            if cls.__name__ == val.__class__.__name__:
+                obj_dict[key] = val
+        return obj_dict
 
     def new(self, obj):
         """sets __object to given obj
         Args:
             obj: given object
         """
-        if obj:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
-            self.__objects[key] = obj
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """serialize the file path to JSON file path
