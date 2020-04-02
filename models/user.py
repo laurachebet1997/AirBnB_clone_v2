@@ -3,42 +3,22 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
-from uuid import uuid4
-from os import environ
 
 
-ty = "HBNB_TYPE_STORAGE"
-if ty in environ.keys() and environ[ty] == "db":
-    class User(BaseModel, Base):
-        """This is the class for user
-        Attributes:
-        email: email address
-        password: password for you login
-        first_name: first name
-        last_name: last name
-        """
-        __tablename__ = "users"
-        email = Column(String(128), nullable=False)
-        password = Column(String(128), nullable=False)
-        first_name = Column(String(128), nullable=True)
-        last_name = Column(String(128), nullable=True)
-        places = relationship("Place", backref="user")
-        reviews = relationship("Review", backref="user")
-
-        def __init__(self, **kwargs):
-            setattr(self, "id", str(uuid4()))
-            for k, v in kwargs.items():
-                setattr(self, k, v)
-else:
-    class User(BaseModel):
-        """This is the class for user
-        Attributes:
-        email: email address
-        password: password for you login
-        first_name: first name
-        last_name: last name
-        """
-        email = ""
-        password = ""
-        first_name = ""
-        last_name = ""
+class User(BaseModel, Base):
+    """This is the class for user
+    Attributes:
+    email: email address
+    password: password for you login
+    first_name: first name
+    last_name: last name
+    """    
+    __tablename__ = "users"
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
+    places = relationship("Place", backref="user",
+                          cascade="all, delete-orphan")
+    reviews = relationship("Review", backref="user",
+                           cascade="all, delete-orphan")
