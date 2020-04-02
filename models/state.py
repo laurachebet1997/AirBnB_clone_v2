@@ -9,9 +9,8 @@ from os import environ
 import models
 from uuid import uuid4
 
-
-if "HBNB_TYPE_STORAGE" in environ.keys(
-) and environ["HBNB_TYPE_STORAGE"] == "db":
+s = "HBNB_TYPE_STORAGE"
+if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
     class State(BaseModel, Base):
         '''
         state class
