@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 from os import environ
 from uuid import uuid4
 
+s = "HBNB_TYPE_STORAGE"
 
 class Review(BaseModel):
     """This is the class for Review
