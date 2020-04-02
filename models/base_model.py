@@ -9,12 +9,12 @@ import uuid
 
 Base = declarative_base()
 
-
+s = "HBNB_TYPE_STORAGE"
 class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    if "HBNB_TYPE_STORAGE" in environ.keys(
+    if s in environ.keys(
     ) and environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(
             String(60),
