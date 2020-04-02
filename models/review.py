@@ -7,7 +7,7 @@ from os import environ
 from uuid import uuid4
 
 s = "HBNB_TYPE_STORAGE"
-
+if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
 class Review(BaseModel):
     """This is the class for Review
     Attributes:
