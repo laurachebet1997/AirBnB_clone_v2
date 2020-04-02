@@ -14,8 +14,7 @@ class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    if s in environ.keys(
-    ) and environ["HBNB_TYPE_STORAGE"] == "db":
+    if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(
             String(60),
             unique=True,
