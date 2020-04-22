@@ -1,41 +1,29 @@
 #!/usr/bin/python3
-"""This is the state class"""
-from models.base_model import BaseModel
-from models.base_model import Base
-from models.city import City
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
-from os import environ
+# This is the state class
 import models
-from uuid import uuid4
+from models import *
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship, backref
+from os import getenv
 
-s = "HBNB_TYPE_STORAGE"
-if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
-    class State(BaseModel, Base):
-        '''
-        state class
-        '''
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
 
-        def __init__(self, **kwargs):
-            setattr(self, "id", str(uuid4()))
-            for i, j in kwargs.items():
-                setattr(self, i, j)
-else:
-    class State(BaseModel):
-        '''
-        state class
-        '''
-        name = ""
+class State(BaseModel, Base):
+    __tablename__ = "states"
+    name = Column(String(128), nullable=False)
 
+    cities = relationship("City", backref="state",
+                          cascade="all, delete, delete-orphan")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    if getenv('HBNB_TYPE_STORAGE', '') != 'db':
         @property
         def cities(self):
-            all_city = models.storage.all(City)
-            liste = []
-            keys = all_city.items()
-            for i, j in keys:
-                if "City" == i[0:4] and j.state_id == self.id:
-                    liste.append(j)
-            return(liste)
+            all_cities = models.storage.all("City")
+            temp = []
+            for c_id in all_cities:
+                if all_cities[c_id].state_id == self.id:
+                    temp.append(all_cities[c_id])
+
+            return temp
