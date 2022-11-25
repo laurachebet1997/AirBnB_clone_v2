@@ -1,28 +1,31 @@
 #!/usr/bin/python3
-# Script that starts a Flask web application
-
+'''A simple Flask web application.
+'''
 from flask import Flask
 
+
 app = Flask(__name__)
+'''The Flask application instance.'''
 app.url_map.strict_slashes = False
 
 
 @app.route('/')
-def hello_route():
-    """ return Hello HBNB! """
+def index():
+    '''The home page.'''
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb')
-def hbnb_route():
-    """ return HBNB """
+def hbnb():
+    '''The hbnb page.'''
     return 'HBNB'
 
 
 @app.route('/c/<text>')
-def c_route(text):
-    """ return c followed by the value of the text variable """
-    return "C {}".format(text.replace("_", " "))
+def c_page(text):
+    '''The c page.'''
+    return 'C {}'.format(text.replace('_', ' '))
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(host='0.0.0.0', port='5000')
