@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # This is the state class
 from models.base_model import BaseModel, Base
-from models import *
+from models.city import City
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship, backref
 from os import getenv
