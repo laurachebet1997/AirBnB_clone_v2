@@ -57,13 +57,9 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes obj if not None fron attribute __objects"""
         if obj is not None:
-            obj_to_del = f"{type(obj).__name__}.{obj.id}"
-            objcts = self.all(obj.__class__.__name__)
-            if objcts.get(obj_to_del):
-                del self.__objects[obj_to_del]
-            self.save()
-        else:
-            return
+            obj_key = obj.to_dict()['__class__'] + '.' + obj.id
+            if obj_key in self.__objects.keys():
+                del self.__objects[obj_key]
 
     def close():
         """calls reload method for deserialization"""
