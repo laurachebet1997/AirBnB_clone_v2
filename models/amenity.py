@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """This is the amenity class"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel,Base
+from sqlalchemy import Column, String
+from os import environ
 
 s = "HBNB_TYPE_STORAGE"
 if s in environ.keys() and environ["HBNB_TYPE_STORAGE"] == "db":
